@@ -6,14 +6,16 @@ function supportLanguages() {
 }
 
 function translate(query, completion) {
+  const reqText = query.text.trim();
+
   try {
-    const json = JSON.parse(query.text);
+    const json = JSON.parse(reqText);
     let content = JSON.stringify(json, undefined, 2);
 
     completion({
       result: {
         toDict: {
-          word: "json",
+          word: "JSON",
           parts: [{ means: [content] }],
         },
       },
@@ -21,39 +23,38 @@ function translate(query, completion) {
     return;
   } catch (e) {}
 
-  if (isBase64(query.text)) {
-    try {
-      const data = base64.toByteArray(query.text.replace(/\s+/g, ""));
-      const content = map(data, function (byte) {
-        return String.fromCharCode(byte);
-      }).join("");
+  if (isBase64(reqText)) {
+    const data = base64.toByteArray(reqText);
+    const content = base64Map(data, function (byte) {
+      return String.fromCharCode(byte);
+    }).join("");
 
-      completion({
-        result: {
-          toDict: {
-            word: "base64",
-            parts: [{ means: [content] }],
-          },
+    completion({
+      result: {
+        toDict: {
+          word: "Base64",
+          parts: [{ means: [content] }],
         },
-      });
-    } catch (e) {}
+      },
+    });
+    return;
   }
 
   completion({
     error: {
       type: "unsupportedLanguage",
       message: "支持文本: JSON、Base64",
-      // message: query.text.replace(/\s+/g, ""),
     },
   });
 }
 
 function isBase64(str) {
-  const regex = /^[A-Za-z0-9+/=]+$/;
+  const regex =
+    /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/;
   return regex.test(str);
 }
 
-function map(arr, callback) {
+function base64Map(arr, callback) {
   const res = [];
   let kValue, mappedValue;
 
