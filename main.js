@@ -21,21 +21,23 @@ function translate(query, completion) {
     return;
   } catch (e) {}
 
-  try {
-    const data = base64.toByteArray(query.text.replace(/\s+/g, ""));
-    const content = map(data, function (byte) {
-      return String.fromCharCode(byte);
-    }).join("");
+  if (isBase64(query.text)) {
+    try {
+      const data = base64.toByteArray(query.text.replace(/\s+/g, ""));
+      const content = map(data, function (byte) {
+        return String.fromCharCode(byte);
+      }).join("");
 
-    completion({
-      result: {
-        toDict: {
-          word: "base64",
-          parts: [{ means: [content] }],
+      completion({
+        result: {
+          toDict: {
+            word: "base64",
+            parts: [{ means: [content] }],
+          },
         },
-      },
-    });
-  } catch (e) {}
+      });
+    } catch (e) {}
+  }
 
   completion({
     error: {
@@ -44,6 +46,11 @@ function translate(query, completion) {
       // message: query.text.replace(/\s+/g, ""),
     },
   });
+}
+
+function isBase64(str) {
+  const regex = /^[A-Za-z0-9+/=]+$/;
+  return regex.test(str);
 }
 
 function map(arr, callback) {
