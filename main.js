@@ -8,6 +8,33 @@ function supportLanguages() {
 function translate(query, completion) {
   const reqText = query.text.trim();
 
+  if (
+    /^((25[0-5]|2[0-4]\d|[01]?[0-9][0-9]?)[\. ]){3}(25[0-5]|2[0-4]\d|[01]?[0-9][0-9]?)$/.test(
+      reqText
+    )
+  ) {
+    $http.get({
+      url: "https://webapi-pc.meitu.com/common/ip_location?ip=" + reqText,
+      header: {
+        Host: "webapi-pc.meitu.com",
+        Accept: "application/json, text/plain, */*",
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36",
+      },
+      handler: function (res) {
+        completion({
+          result: {
+            toDict: {
+              word: "JSON",
+              parts: [{ means: [JSON.stringify(res.data.data, undefined, 2)] }],
+            },
+          },
+        });
+      },
+    });
+    return;
+  }
+
   if (/^(\{|\[)([\s\S]*)(\}|\])$/.test(reqText)) {
     try {
       const json = JSON.parse(reqText);
@@ -100,7 +127,7 @@ function base64Map(arr, callback) {
 
 function parseDate(str) {
   if (/^\d{10}$/.test(str)) {
-    return new Date(Number(str));
+    return new Date(Number(str) * 1000);
   }
   if (/^\d{13}$/.test(str)) {
     return new Date(Number(str));
