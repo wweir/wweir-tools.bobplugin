@@ -7,7 +7,7 @@
   "icon": "",
   "author": "",
   "homepage": "",
-  "appcast": "",
+  "appcast": "https://raw.githubusercontent.com/wweir/wweir-tools.bobplugin/refs/heads/main/appcast.json",
   "minBobVersion": "0.5.0",
   "options": []
 }

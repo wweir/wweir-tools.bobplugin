@@ -1,0 +1,13 @@
+{
+  "identifier": "com.ripperhe.translate.test",
+  "versions": [
+    {
+      "version": "0.3.0",
+      "desc": "重构一下，实现了 readme 中列出的功能",
+      "sha256": "00744ca8b8d84713425b7fc2073ca498aa7633faac537a1c1fa80d1264d3fc03",
+      "url": "https://raw.githubusercontent.com/ripperhe/test/master/bobplugin/test_0.3.0.bobplugin",
+      "minBobVersion": "0.5.0",
+      "timestamp": 1729929172050
+    }
+  ]
+}
