@@ -4,7 +4,7 @@
     {
       "version": "0.3.0",
       "desc": "重构一下，实现了 readme 中列出的功能",
-      "sha256": "6359a0376995a9ea3f3e31e4570853e4b938454d0ebc6e8f33299341814f28af",
+      "sha256": "70439d4c57f2bd4dbe5a4dfed915689d28c7f8368f370628d689ebc41e791136",
       "url": "https://raw.githubusercontent.com/ripperhe/test/master/bobplugin/test_0.3.0.bobplugin",
       "minBobVersion": "0.5.0",
       "timestamp": 1729929172050
