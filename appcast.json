@@ -1,10 +1,10 @@
 {
-  "identifier": "com.ripperhe.translate.test",
+  "identifier": "cc.wweir.bobplugin.wweir-tools",
   "versions": [
     {
       "version": "0.3.0",
       "desc": "重构一下，实现了 readme 中列出的功能",
-      "sha256": "00744ca8b8d84713425b7fc2073ca498aa7633faac537a1c1fa80d1264d3fc03",
+      "sha256": "f019f83e8ae6e6e0b083081a1d87c15aaba7d2323f653bfdff53cbb8ccd67851",
       "url": "https://raw.githubusercontent.com/ripperhe/test/master/bobplugin/test_0.3.0.bobplugin",
       "minBobVersion": "0.5.0",
       "timestamp": 1729929172050
