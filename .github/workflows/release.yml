@@ -15,6 +15,7 @@ jobs:
       - name: build plugin
         run: |
           zip wweir-tools.bobplugin LICENSE info.json icon.png *.js
+          sha256sum wweir-tools.bobplugin
 
       - uses: ncipollo/release-action@v1
         with:

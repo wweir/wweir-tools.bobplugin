@@ -104,28 +104,22 @@ function translate(query, completion) {
       reqText
     )
   ) {
+    const ip = reqText.replace(/\s/g, ".");
     $http.get({
-      url:
-        "https://webapi-pc.meitu.com/common/ip_location?ip=" +
-        reqText.replace(/\s/g, "."),
+      url: "https://webapi-pc.meitu.com/common/ip_location?ip=" + ip,
       header: {
         Host: "webapi-pc.meitu.com",
         Accept: "application/json, text/plain, */*",
       },
       handler: function (res) {
+        const respText = JSON.stringify(res.data.data[ip], undefined, 2);
         completion({
           result: {
             toDict: {
-              word: "查询 IP 地址: " + reqText.replace(/\s/g, "."),
+              word: "查询 IP 地址: " + ip,
               parts: [
                 {
-                  means: [
-                    JSON.stringify(
-                      res.data.data[reqText.replace(/\s/g, ".")],
-                      undefined,
-                      2
-                    ),
-                  ],
+                  means: [respText],
                 },
               ],
             },
@@ -156,14 +150,16 @@ function translate(query, completion) {
   if (base64.isValid(reqText)) {
     try {
       const text = base64.decode(reqText);
-      completion({
-        result: {
-          toDict: {
-            word: "Base64 解码",
-            parts: [{ means: [text] }],
+      if (/[\u0020-\u007E\u00A0-\uFFFF]/.test(text)) {
+        completion({
+          result: {
+            toDict: {
+              word: "Base64 解码",
+              parts: [{ means: [text] }],
+            },
           },
-        },
-      });
+        });
+      }
       return;
     } catch (e) {}
   }
