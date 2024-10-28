@@ -43,9 +43,13 @@ function translate(query, completion) {
             parts: [
               {
                 means: [
-                  Math.floor(now / 1000).toString(),
-                  now.toString(),
-                  Math.floor(now * 1_000_000).toString(),
+                  Date(now).toLocaleString() +
+                    "\n" +
+                    Math.floor(now / 1000).toString() +
+                    "\n" +
+                    now.toString() +
+                    "\n" +
+                    Math.floor(now * 1_000_000).toString(),
                 ],
               },
             ],
