@@ -2,6 +2,14 @@
   "identifier": "cc.wweir.bobplugin.wweir-tools",
   "versions": [
     {
+      "version": "0.3.1",
+      "desc": "美化一些输出",
+      "sha256": "e281ff7c3b4a3795df14d9fbdc1f58fdfa98eb1a65bad6d4a6567832d1e1b594",
+      "url": "https://raw.githubusercontent.com/ripperhe/test/master/bobplugin/test_0.3.0.bobplugin",
+      "minBobVersion": "0.5.0",
+      "timestamp": 1729929172050
+    },
+    {
       "version": "0.3.0",
       "desc": "重构一下，实现了 readme 中列出的功能",
       "sha256": "70439d4c57f2bd4dbe5a4dfed915689d28c7f8368f370628d689ebc41e791136",
